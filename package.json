@@ -1,0 +1,16 @@
+{
+  "name": "scammer-chat",
+  "version": "1.0.0",
+  "description": "Scammer AI chat interface",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "openai": "^4.19.0"
+  },
+  "devDependencies": {
+    "vite": "^4.5.0"
+  }
+} 

@@ -1,0 +1,981 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+    height: 100vh;
+    overflow: hidden;
+    cursor: default;
+}
+
+.desktop {
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+    background-size: cover;
+}
+
+/* Taskbar */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, #1e5799, #2989d8);
+    border-top: 1px solid #4e9ad8;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.start-button {
+    background: linear-gradient(to bottom, #4e9ad8, #1e5799);
+    border: 1px outset #4e9ad8;
+    height: 32px;
+    padding: 0 15px;
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+
+.start-button:hover {
+    background: linear-gradient(to bottom, #5eaae8, #2e6799);
+    transform: translateY(-1px);
+}
+
+.start-button:active {
+    border: 1px inset #4e9ad8;
+}
+
+.start-icon {
+    font-size: 16px;
+}
+
+.taskbar-items {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    margin-left: 10px;
+}
+
+.taskbar-item {
+    background: linear-gradient(to bottom, #4e9ad8, #1e5799);
+    border: 1px outset #4e9ad8;
+    height: 32px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 2px;
+    max-width: 200px;
+}
+
+.taskbar-item.active {
+    border: 1px inset #4e9ad8;
+    background: linear-gradient(to bottom, #2e6799, #4e9ad8);
+}
+
+.system-tray {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 8px;
+    color: white;
+    font-size: 11px;
+}
+
+.tray-icon {
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.tray-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.clock {
+    background: linear-gradient(to bottom, #1e5799, #4e9ad8);
+    border: 1px inset #4e9ad8;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 2px;
+}
+
+/* Desktop Icons */
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    width: 80px;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-icon .icon {
+    font-size: 32px;
+    margin-bottom: 4px;
+}
+
+.icon-label {
+    color: white;
+    font-size: 11px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    word-wrap: break-word;
+}
+
+/* Main Window */
+.window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    height: 70%;
+    background: #ece9d8;
+    border: 2px outset #ece9d8;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-header {
+    background: linear-gradient(to right, #0a246a, #a6caf0);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    border-radius: 6px 6px 0 0;
+}
+
+.window-title {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.window-icon {
+    font-size: 14px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.control-btn {
+    width: 21px;
+    height: 21px;
+    background: #c3c3c3;
+    border: 1px outset #c3c3c3;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: #d4d4d4;
+}
+
+.control-btn:active {
+    border: 1px inset #c3c3c3;
+}
+
+.control-btn.close {
+    background: #ff6b6b;
+    color: white;
+}
+
+.control-btn.close:hover {
+    background: #ff5252;
+}
+
+/* Window Content */
+.window-content {
+    flex: 1;
+    background: #ece9d8;
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    margin: 4px;
+    border: 2px inset #ece9d8;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    display: flex;
+    gap: 10px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message.support {
+    align-self: flex-start;
+}
+
+.message-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3282b8, #0f4c75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.message-content {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message.user .message-content {
+    background: #e3f2fd;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 11px;
+    color: #666;
+}
+
+.sender-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.message-text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.system-message {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 12px;
+    color: #856404;
+    margin: 10px 0;
+}
+
+/* Chat Input */
+.chat-input-container {
+    padding: 10px;
+    background: #f0f0f0;
+    border-top: 1px solid #ccc;
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input {
+    cursor: text;
+    flex: 1;
+    padding: 8px;
+    border: 2px inset #ece9d8;
+    font-size: 12px;
+    background: white;
+}
+
+.send-button {
+    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
+    border: 1px outset #c3c3c3;
+    padding: 8px 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+}
+
+.send-button:active {
+    border: 1px inset #c3c3c3;
+}
+
+/* Fake Popup */
+.fake-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: #ece9d8;
+    border: 2px outset #ece9d8;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    animation: popupBounce 0.5s ease-out;
+}
+
+.popup-header {
+    background: linear-gradient(to right, #ff4444, #ffaaaa);
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.popup-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.popup-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    animation: pulse 1s infinite;
+    color: #ff4444;
+}
+
+.popup-text h3 {
+    color: #d32f2f;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.popup-text p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.popup-btn {
+    padding: 6px 12px;
+    border: 1px outset #c3c3c3;
+    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.popup-btn.danger {
+    background: linear-gradient(to bottom, #ff6b6b, #e74c3c);
+    color: white;
+    animation: blink 1.5s infinite;
+}
+
+.popup-btn:hover {
+    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+}
+
+.popup-btn:active {
+    border: 1px inset #c3c3c3;
+}
+
+/* Status Bar */
+.status-bar {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: #f0f0f0;
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #333;
+}
+
+.status-item {
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+}
+
+.status-item:last-child {
+    border-right: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popupBounce {
+    0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+    50% { transform: scale(1.1) translateY(0); }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.7; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .window {
+        width: 95%;
+        height: 80%;
+    }
+    
+    .desktop-icons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .desktop-icon {
+        width: 60px;
+    }
+    
+    .desktop-icon .icon {
+        font-size: 24px;
+    }
+    
+    .icon-label {
+        font-size: 10px;
+    }
+    
+    .fake-popup {
+        width: 90%;
+        right: 5%;
+        top: 10px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .taskbar-item {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .system-tray {
+        display: none;
+    }
+    
+    .status-bar {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .start-button {
+        padding: 0 8px;
+        font-size: 11px;
+    }
+    
+    .taskbar-items {
+        margin-left: 5px;
+    }
+    
+    .taskbar-item {
+        max-width: 100px;
+        padding: 0 6px;
+        font-size: 10px;
+    }
+    
+    .window-title {
+        font-size: 11px;
+    }
+    
+    .message-text {
+        font-size: 12px;
+    }
+    
+    .chat-input {
+        font-size: 11px;
+    }
+    
+    .send-button {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+/* Scrollbar styling for webkit browsers */
+.chat-messages::-webkit-scrollbar {
+    width: 16px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px inset #ece9d8;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
+    border: 1px outset #c3c3c3;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+}
+
+/* Additional XP-style elements */
+.window-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+    z-index: 1;
+}
+
+/* Typing indicator */
+.typing-indicator {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20px;
+}
+
+.typing-indicator .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    background-color: #999;
+    border-radius: 50%;
+    animation: typing-animation 1.4s infinite ease-in-out;
+}
+
+.typing-indicator .dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-animation {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Start Menu */
+.start-menu {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 250px;
+    background: linear-gradient(to bottom, #ffffff, #d8e4f8);
+    border: 2px solid #0a246a;
+    border-bottom: none;
+    box-shadow: 2px -2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    display: none;
+    animation: slideUp 0.2s ease-out;
+}
+
+.start-menu.visible {
+    display: block;
+}
+
+.start-button.active {
+    background: linear-gradient(to bottom, #316ac5, #4e9ae1);
+    border: 1px inset #2b5ea4;
+}
+
+.start-menu-header {
+    background: linear-gradient(to right, #0a246a, #a6caf0);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.start-menu-items {
+    padding: 5px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.start-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.start-menu-item:hover {
+    background-color: #316ac5;
+    color: white;
+}
+
+.item-icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+.item-name {
+    font-size: 12px;
+}
+
+.start-menu-separator {
+    height: 1px;
+    background: #d4d0c8;
+    margin: 5px 10px;
+}
+
+/* Desktop Icon Selection */
+.desktop-icon.selected {
+    background: rgba(11, 97, 255, 0.2);
+    border: 1px dotted #fff;
+}
+
+.desktop-icon:active {
+    transform: translateY(1px);
+}
+
+/* Windows and Popups */
+.window {
+    transition: transform 0.2s ease-out;
+    position: absolute;
+}
+
+.window.minimized {
+    display: none;
+}
+
+.window.maximized {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(100% - 60px) !important; /* Account for taskbar and status bar */
+    transform: none !important;
+    border-radius: 0 !important;
+    animation: none !important;
+}
+
+.fake-window {
+    width: 400px;
+    height: auto;
+    min-height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: popupBounce 0.3s ease-out;
+}
+
+.fake-window-content {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* Shutdown Dialog */
+.shutdown-dialog {
+    width: 400px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: popupBounce 0.3s ease-out;
+}
+
+.shutdown-content {
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.shutdown-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.shutdown-btn, .cancel-btn {
+    padding: 6px 12px;
+    border: 1px outset #c3c3c3;
+    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.shutdown-btn {
+    background: linear-gradient(to bottom, #ff6b6b, #e74c3c);
+    color: white;
+}
+
+.shutdown-btn:hover {
+    background: linear-gradient(to bottom, #ff5252, #c0392b);
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+}
+
+/* Blue Screen of Death */
+.blue-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000aa;
+    color: white;
+    font-family: 'Courier New', monospace;
+    padding: 50px;
+    z-index: 10000;
+    overflow: auto;
+}
+
+.bsod-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bsod-content h1 {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.bsod-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.bsod-continue {
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+/* Make desktop elements clickable */
+.desktop-icon, .taskbar-item, .start-button, .control-btn, .popup-btn, .start-menu-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 0; }
+    50%, 100% { opacity: 1; }
+}
+
+/* XP-style icons */
+.xp-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6ac8ff 0%, #1084d0 100%);
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 6px;
+    border: 1px solid #0563a4;
+    color: white;
+    font-size: 24px;
+}
+
+.xp-icon i {
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.desktop-icon .fa-desktop {
+    color: #f8f8ff;
+}
+
+.desktop-icon .fa-folder {
+    color: #ffffcc;
+}
+
+.desktop-icon .fa-trash-alt {
+    color: #f0f0f0;
+}
+
+.message-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #3282b8, #0f4c75);
+    color: white;
+    font-size: 16px;
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.start-icon i {
+    color: white;
+    font-size: 16px;
+}
+
+.window-icon i {
+    color: white;
+    font-size: 14px;
+}
+
+/* Make sure icons are centered in various containers */
+.start-button, .item-icon, .user-avatar, .message-avatar, .popup-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    animation: pulse 1s infinite;
+    color: #ff4444;
+}
+
+.system-message .fa-exclamation-triangle {
+    color: #856404;
+    margin-right: 5px;
+}
+
+.status-bar .fa-dizzy {
+    color: #ff4444;
+    animation: pulse 1s infinite;
+}

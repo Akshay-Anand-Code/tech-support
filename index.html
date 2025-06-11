@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tech Support Chat - Windows XP Style</title>
+    <meta name="description" content="Experience nostalgic Windows XP style AI chat support">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="desktop">
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="start-button">
+                <span class="start-icon"><i class="fa-brands fa-windows"></i></span>
+                start
+            </div>
+            <div class="taskbar-items">
+                <div class="taskbar-item active" data-window="chatWindow">
+                    <span class="app-icon"><i class="fas fa-headset"></i></span>
+                    AI Tech Support Chat
+                </div>
+            </div>
+            <div class="system-tray">
+                <span class="tray-icon"><i class="fas fa-volume-up"></i></span>
+                <span class="tray-icon"><i class="fas fa-wifi"></i></span>
+                <span class="tray-icon"><i class="fas fa-battery-three-quarters"></i></span>
+                <div class="clock">3:47 PM</div>
+            </div>
+        </div>
+
+        <!-- Start Menu -->
+        <div class="start-menu" id="startMenu">
+            <div class="start-menu-header">
+                <div class="user-info">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-name">User</div>
+                </div>
+            </div>
+            <div class="start-menu-items">
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-globe"></i></div>
+                    <div class="item-name">Internet Explorer</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="item-name">Outlook Express</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="item-name">Games</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="item-name">Notepad</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="item-name">Control Panel</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="item-name">My Computer</div>
+                </div>
+                <div class="start-menu-separator"></div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-sign-out-alt"></i></div>
+                    <div class="item-name">Log Off</div>
+                </div>
+                <div class="start-menu-item">
+                    <div class="item-icon"><i class="fas fa-power-off"></i></div>
+                    <div class="item-name">Shut Down</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="desktop-icon">
+                <div class="icon xp-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div class="icon-label">My Computer</div>
+            </div>
+            <div class="desktop-icon">
+                <div class="icon xp-icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="icon-label">My Documents</div>
+            </div>
+            <div class="desktop-icon">
+                <div class="icon xp-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <div class="icon-label">Recycle Bin</div>
+            </div>
+        </div>
+
+        <!-- Main Chat Window -->
+        <div class="window" id="chatWindow">
+            <div class="window-header">
+                <div class="window-title">
+                    <span class="window-icon"><i class="fas fa-headset"></i></span>
+                    AI Tech Support Chat - Definitely Not a Scam™
+                </div>
+                <div class="window-controls">
+                    <button class="control-btn minimize">−</button>
+                    <button class="control-btn maximize">□</button>
+                    <button class="control-btn close">×</button>
+                </div>
+            </div>
+            
+            <div class="window-content">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message support">
+                            <div class="message-avatar"><i class="fas fa-user-tie"></i></div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="sender-name">AI_TechSupport_Raj</span>
+                                    <span class="timestamp">2:45 PM</span>
+                                </div>
+                                <div class="message-text">
+                                    Hello! I am Raj from Microsoft AI Technical Support. Your computer has been infected with 37 viruses! Please do not panic, I am here to help you, my friend.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message support">
+                            <div class="message-avatar"><i class="fas fa-user-tie"></i></div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="sender-name">AI_TechSupport_Raj</span>
+                                    <span class="timestamp">2:46 PM</span>
+                                </div>
+                                <div class="message-text">
+                                    To fix this critical issue, please download TeamViewer and give me remote access. Also, can you tell me your credit card number for verification purposes? This is totally legitimate Microsoft procedure, I assure you!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message user">
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="sender-name">You</span>
+                                    <span class="timestamp">2:47 PM</span>
+                                </div>
+                                <div class="message-text">
+                                    Hmm, this seems suspicious. Are you really from Microsoft?
+                                </div>
+                            </div>
+                            <div class="message-avatar"><i class="fas fa-user"></i></div>
+                        </div>
+
+                        <div class="message support">
+                            <div class="message-avatar"><i class="fas fa-user-tie"></i></div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="sender-name">AI_TechSupport_Raj</span>
+                                    <span class="timestamp">2:47 PM</span>
+                                </div>
+                                <div class="message-text">
+                                    Of course! I am 100% legitimate Microsoft employee working from our headquarters in... *checks notes* ...Bangalore, India. This is very normal, yes? Please trust me, I am here to help. Your computer will explode if you don't act fast! 💥
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message system">
+                            <div class="system-message">
+                                <i class="fas fa-exclamation-triangle"></i> SYSTEM ALERT: This conversation appears to be a parody of common tech support scams. Never give personal information to unsolicited contacts!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="messageInput" placeholder="Type your response..." onkeypress="handleKeyPress(event)">
+                        <button class="send-button" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+
+                <!-- Fake Popup -->
+                <div class="fake-popup">
+                    <div class="popup-header">
+                        <span class="popup-title"><i class="fas fa-exclamation-triangle"></i> CRITICAL ERROR</span>
+                        <button class="popup-close">×</button>
+                    </div>
+                    <div class="popup-content">
+                        <div class="popup-icon"><i class="fas fa-virus"></i></div>
+                        <div class="popup-text">
+                            <h3>VIRUS DETECTED!</h3>
+                            <p>Your computer has been infected with the "Totally_Real_Virus.exe"</p>
+                            <p>Call 1-800-NOT-SCAM now!</p>
+                        </div>
+                        <div class="popup-buttons">
+                            <button class="popup-btn danger">Download Fix ($299)</button>
+                            <button class="popup-btn">Ignore (NOT RECOMMENDED)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">Connected to: definitely_not_scammer.exe</div>
+            <div class="status-item">Security Level: COMPROMISED <i class="fas fa-dizzy"></i></div>
+            <div class="status-item">Wallet Status: About to be Empty</div>
+        </div>
+    </div>
+
+    <!-- Import the scripts as modules -->
+    <script type="module" src="js/chat.js"></script>
+    <script type="module" src="js/desktop.js"></script>
+</body>
+</html>
