@@ -212,5 +212,44 @@
     <!-- Import the scripts as modules -->
     <script type="module" src="js/chat.js"></script>
     <script type="module" src="js/desktop.js"></script>
+
+    <!-- Fake Virus Install Popup -->
+    <div class="virus-install-popup" id="virusInstallPopup" style="display:none;">
+      <div class="virus-header">
+        <span class="virus-title">Virus Fix</span>
+        <button class="virus-close" onclick="closeVirusPopup()">×</button>
+      </div>
+      <div class="virus-content">
+        <div class="virus-message" id="virusMessage">
+          Downloading premium virus protection...
+        </div>
+        <div class="virus-loading-bar">
+          <div class="virus-loading-fill" id="virusLoadingFill"></div>
+        </div>
+        <div class="virus-percent" id="virusPercent">0%</div>
+      </div>
+    </div>
+
+    <!-- Credit Card Popup -->
+    <div class="credit-card-popup" id="creditCardPopup">
+      <div class="credit-card-header">
+        <span class="credit-card-title">Credit Card Required</span>
+        <button class="credit-card-close" onclick="closeCreditCardPopup()">×</button>
+      </div>
+      <div class="credit-card-content">
+        <div class="glitch-text" data-text="Please provide your credit card information to continue.">
+          Please provide your credit card information to continue.
+        </div>
+        <form id="creditCardForm" autocomplete="off" onsubmit="event.preventDefault(); fakeSubmitCreditCard();">
+          <label for="cc-number">Card Number</label>
+          <input type="text" id="cc-number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+          <label for="cc-exp">Expiry</label>
+          <input type="text" id="cc-exp" maxlength="5" placeholder="MM/YY" required>
+          <label for="cc-cvc">CVC</label>
+          <input type="text" id="cc-cvc" maxlength="4" placeholder="123" required>
+          <button class="credit-card-submit" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
 </body>
 </html>

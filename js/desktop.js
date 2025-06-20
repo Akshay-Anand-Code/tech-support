@@ -164,7 +164,7 @@ function initializePopups() {
         button.addEventListener('click', () => {
             const isDownloadBtn = button.classList.contains('danger');
             if (isDownloadBtn) {
-                showFakeWindow('Virus Fix', '<i class="fas fa-virus"></i>', 'Downloading premium virus protection... Please provide credit card information to continue.');
+                showVirusInstallPopup();
             } else {
                 // Show another warning if they try to ignore
                 showFakeWindow('Security Warning', '<i class="fas fa-exclamation-triangle"></i>', 'WARNING! Ignoring this virus will result in permanent damage to your computer! Please call our tech support immediately!');
@@ -453,4 +453,60 @@ function updateClock() {
             minute: '2-digit'
         });
     }
+}
+
+// --- Virus Install Popup Logic ---
+window.showVirusInstallPopup = showVirusInstallPopup;
+
+function showVirusInstallPopup() {
+    const popup = document.getElementById('virusInstallPopup');
+    if (!popup) return;
+    popup.style.display = 'block';
+    let percent = 0;
+    const fill = document.getElementById('virusLoadingFill');
+    const percentText = document.getElementById('virusPercent');
+    const message = document.getElementById('virusMessage');
+    const desktop = document.querySelector('.desktop');
+    fill.style.width = '0%';
+    percentText.textContent = '0%';
+    message.textContent = 'Downloading premium virus protection...';
+    message.classList.remove('glitch-text');
+    desktop.classList.remove('glitchy');
+    let interval = setInterval(() => {
+        percent += Math.random() * 5 + 2;
+        if (percent > 100) percent = 100;
+        fill.style.width = percent + '%';
+        percentText.textContent = Math.floor(percent) + '%';
+        if (percent >= 100) {
+            clearInterval(interval);
+            message.textContent = "Virus installed! System compromised!";
+            message.classList.add('glitch-text');
+            message.setAttribute('data-text', message.textContent);
+            desktop.classList.add('glitchy');
+            setTimeout(() => {
+                desktop.classList.remove('glitchy');
+                popup.style.display = 'none';
+                showCreditCardPopup();
+            }, 3000);
+        }
+    }, 80);
+}
+
+function showCreditCardPopup() {
+    const popup = document.getElementById('creditCardPopup');
+    if (popup) popup.style.display = 'block';
+}
+
+function closeCreditCardPopup() {
+    const popup = document.getElementById('creditCardPopup');
+    if (popup) popup.style.display = 'none';
+}
+
+function fakeSubmitCreditCard() {
+    const form = document.getElementById('creditCardForm');
+    if (form) {
+        form.reset();
+    }
+    alert('Thank you for your submission! (Not really)');
+    closeCreditCardPopup();
 } 
