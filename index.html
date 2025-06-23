@@ -10,6 +10,30 @@
 </head>
 <body>
     <div class="desktop">
+        <!-- Wallpaper Ads -->
+        <div class="wallpaper-ads">
+            <div class="wallpaper-ad ad-1">
+                <h3><i class="fas fa-gift"></i> YOU WON!</h3>
+                <p>You are the 1,000,000th visitor!</p>
+                <a href="#">CLICK HERE to claim your FREE vacation!</a>
+            </div>
+            <div class="wallpaper-ad ad-2">
+                <h3><i class="fas fa-exclamation-triangle"></i> PC running slow?</h3>
+                <p>You have (17) registry errors!</p>
+                <a href="#">Download PC Optimizer PRO Now!</a>
+            </div>
+            <div class="wallpaper-ad ad-3">
+                <p>Make <strong>$5,000/week</strong> from home!</p>
+                <p>Doctors hate him for this one weird trick!</p>
+                <a href="#">Find out more!</a>
+            </div>
+            <div class="wallpaper-ad ad-4">
+                <h3><i class="fas fa-heart"></i> Lonely?</h3>
+                <p>Hot singles in [Your Town] want to chat!</p>
+                <a href="#">Don't keep them waiting!</a>
+            </div>
+        </div>
+
         <!-- Taskbar -->
         <div class="taskbar">
             <div class="start-button">
@@ -112,6 +136,7 @@
             </div>
             
             <div class="window-content">
+                <button class="solana-button" id="solanaButton">REDEEM FOR SOLANA</button>
                 <div class="chat-container">
                     <div class="chat-messages" id="chatMessages">
                         <div class="message support">
@@ -208,6 +233,9 @@
             <div class="status-item">Wallet Status: About to be Empty</div>
         </div>
     </div>
+
+    <!-- Audio element for sound effect -->
+    <audio id="solanaSound" src="DO NOT REDEEM THE CARD!.mp3" preload="auto"></audio>
 
     <!-- Import the scripts as modules -->
     <script type="module" src="js/chat.js"></script>

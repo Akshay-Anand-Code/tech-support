@@ -1,7 +1,10 @@
+let glitchIntervalId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeDesktop();
     initializeStartMenu();
     initializePopups();
+    initializeSolanaButton();
     updateClock();
     setInterval(updateClock, 60000); // Update clock every minute
 });
@@ -459,54 +462,247 @@ function updateClock() {
 window.showVirusInstallPopup = showVirusInstallPopup;
 
 function showVirusInstallPopup() {
-    const popup = document.getElementById('virusInstallPopup');
-    if (!popup) return;
-    popup.style.display = 'block';
-    let percent = 0;
-    const fill = document.getElementById('virusLoadingFill');
-    const percentText = document.getElementById('virusPercent');
-    const message = document.getElementById('virusMessage');
+    // Start the chaotic glitching effect
+    startChaoticGlitch();
+    
+    // After the glitch effect, show the normal virus popup
+    setTimeout(() => {
+        const popup = document.getElementById('virusInstallPopup');
+        if (!popup) return;
+        popup.style.display = 'block';
+        let percent = 0;
+        const fill = document.getElementById('virusLoadingFill');
+        const percentText = document.getElementById('virusPercent');
+        const message = document.getElementById('virusMessage');
+        const desktop = document.querySelector('.desktop');
+        fill.style.width = '0%';
+        percentText.textContent = '0%';
+        message.textContent = 'Downloading premium virus protection...';
+        message.classList.remove('glitch-text');
+        desktop.classList.remove('glitchy');
+        let interval = setInterval(() => {
+            percent += Math.random() * 5 + 2;
+            if (percent > 100) percent = 100;
+            fill.style.width = percent + '%';
+            percentText.textContent = Math.floor(percent) + '%';
+            if (percent >= 100) {
+                clearInterval(interval);
+                message.textContent = "Virus installed! System compromised!";
+                message.classList.add('glitch-text');
+                message.setAttribute('data-text', message.textContent);
+                desktop.classList.add('glitchy');
+                setTimeout(() => {
+                    desktop.classList.remove('glitchy');
+                    popup.style.display = 'none';
+                    showCreditCardPopup();
+                }, 3000);
+            }
+        }, 80);
+    }, 4000); // Wait 4 seconds for the glitch effect to complete
+}
+
+function startChaoticGlitch() {
     const desktop = document.querySelector('.desktop');
-    fill.style.width = '0%';
-    percentText.textContent = '0%';
-    message.textContent = 'Downloading premium virus protection...';
-    message.classList.remove('glitch-text');
-    desktop.classList.remove('glitchy');
-    let interval = setInterval(() => {
-        percent += Math.random() * 5 + 2;
-        if (percent > 100) percent = 100;
-        fill.style.width = percent + '%';
-        percentText.textContent = Math.floor(percent) + '%';
-        if (percent >= 100) {
-            clearInterval(interval);
-            message.textContent = "Virus installed! System compromised!";
-            message.classList.add('glitch-text');
-            message.setAttribute('data-text', message.textContent);
-            desktop.classList.add('glitchy');
-            setTimeout(() => {
-                desktop.classList.remove('glitchy');
-                popup.style.display = 'none';
-                showCreditCardPopup();
-            }, 3000);
+    const body = document.body;
+    
+    // Add red tint overlay
+    const redOverlay = document.createElement('div');
+    redOverlay.id = 'redOverlay';
+    redOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 0, 0, 0.3);
+        z-index: 9998;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.1s;
+    `;
+    body.appendChild(redOverlay);
+    
+    // Create multiple fake popups
+    const fakePopupMessages = [
+        "CRITICAL ERROR: System compromised!",
+        "VIRUS DETECTED: Immediate action required!",
+        "WARNING: Your computer is under attack!",
+        "SECURITY BREACH: Contact support NOW!",
+        "MALWARE ALERT: System files corrupted!",
+        "EMERGENCY: Your data is being stolen!",
+        "HACKER DETECTED: System lockdown initiated!",
+        "FATAL ERROR: Windows security compromised!",
+        "INTRUSION ALERT: Foreign IP detected!",
+        "SYSTEM FAILURE: Critical files missing!"
+    ];
+    
+    let popupCount = 0;
+    const maxPopups = 8;
+    
+    // Function to create a random fake popup
+    function createFakePopup() {
+        if (popupCount >= maxPopups) return;
+        
+        const popup = document.createElement('div');
+        popup.className = 'chaotic-popup';
+        popup.style.cssText = `
+            position: fixed;
+            top: ${Math.random() * (window.innerHeight - 200)}px;
+            left: ${Math.random() * (window.innerWidth - 300)}px;
+            width: 300px;
+            background: #ff0000;
+            color: white;
+            border: 3px solid #ffff00;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 0 20px #ff0000;
+            animation: chaoticPopupShake 0.1s infinite;
+            text-align: center;
+        `;
+        
+        const message = fakePopupMessages[Math.floor(Math.random() * fakePopupMessages.length)];
+        popup.innerHTML = `
+            <div style="margin-bottom: 10px;">⚠️ ${message} ⚠️</div>
+            <div style="font-size: 12px; color: #ffff00;">
+                ${Math.floor(Math.random() * 9999)} ERRORS DETECTED<br>
+                SYSTEM: ${Math.floor(Math.random() * 100)}% COMPROMISED
+            </div>
+        `;
+        
+        body.appendChild(popup);
+        popupCount++;
+        
+        // Remove popup after random time
+        setTimeout(() => {
+            if (popup.parentNode) {
+                popup.remove();
+                popupCount--;
+            }
+        }, 500 + Math.random() * 1000);
+    }
+    
+    // Start the chaotic sequence
+    let glitchPhase = 0;
+    const glitchInterval = setInterval(() => {
+        glitchPhase++;
+        
+        // Phase 1: Start red tint and first popups
+        if (glitchPhase <= 10) {
+            redOverlay.style.opacity = Math.min(0.3, glitchPhase * 0.03);
+            if (Math.random() < 0.3) createFakePopup();
         }
-    }, 80);
+        // Phase 2: Intense glitching
+        else if (glitchPhase <= 20) {
+            redOverlay.style.opacity = 0.3 + Math.random() * 0.2;
+            desktop.classList.add('glitchy');
+            if (Math.random() < 0.6) createFakePopup();
+        }
+        // Phase 3: Peak chaos
+        else if (glitchPhase <= 30) {
+            redOverlay.style.opacity = 0.4 + Math.random() * 0.3;
+            if (Math.random() < 0.8) createFakePopup();
+            // Random screen shake
+            if (Math.random() < 0.3) {
+                body.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px)`;
+                setTimeout(() => {
+                    body.style.transform = '';
+                }, 50);
+            }
+        }
+        // Phase 4: Wind down
+        else if (glitchPhase <= 40) {
+            redOverlay.style.opacity = Math.max(0, 0.4 - (glitchPhase - 30) * 0.04);
+            desktop.classList.remove('glitchy');
+            if (Math.random() < 0.2) createFakePopup();
+        }
+        // End the chaos
+        else {
+            clearInterval(glitchInterval);
+            redOverlay.remove();
+            desktop.classList.remove('glitchy');
+            body.style.transform = '';
+        }
+    }, 100);
 }
 
 function showCreditCardPopup() {
     const popup = document.getElementById('creditCardPopup');
-    if (popup) popup.style.display = 'block';
+    if (popup) {
+        popup.style.display = 'block';
+    }
+
+    // Don't start a new interval if one is already running
+    if (glitchIntervalId) return;
+
+    // Start the first glitch immediately
+    startChaoticGlitch();
+
+    // Set the repeating glitch every 10 seconds
+    glitchIntervalId = setInterval(() => {
+        startChaoticGlitch();
+
+        // The glitch runs for 4 seconds. After it's done, re-show the popup
+        // in case the user closed it.
+        setTimeout(() => {
+            const popup = document.getElementById('creditCardPopup');
+            if (popup) {
+                popup.style.display = 'block';
+            }
+        }, 4000);
+    }, 10000);
 }
+window.showCreditCardPopup = showCreditCardPopup;
 
 function closeCreditCardPopup() {
     const popup = document.getElementById('creditCardPopup');
     if (popup) popup.style.display = 'none';
+    // We don't clear the interval here, so the chaos will continue!
 }
+window.closeCreditCardPopup = closeCreditCardPopup;
 
 function fakeSubmitCreditCard() {
+    // Stop the repeating chaos
+    if (glitchIntervalId) {
+        clearInterval(glitchIntervalId);
+        glitchIntervalId = null;
+    }
+
     const form = document.getElementById('creditCardForm');
     if (form) {
         form.reset();
     }
-    alert('Thank you for your submission! (Not really)');
     closeCreditCardPopup();
+
+    // Show a more "official" confirmation window instead of an alert
+    showFakeWindow(
+        'Payment Successful', 
+        '<i class="fas fa-check-circle" style="color: #28a745;"></i>', 
+        'Your payment of $299 has been processed. Thank you for your cooperation, my friend. Your computer is now 100% secure, I promise.'
+    );
+}
+window.fakeSubmitCreditCard = fakeSubmitCreditCard;
+
+function initializeSolanaButton() {
+    const solanaButton = document.getElementById('solanaButton');
+    const solanaSound = document.getElementById('solanaSound');
+
+    if (solanaButton && solanaSound) {
+        solanaButton.addEventListener('click', () => {
+            solanaSound.currentTime = 0; // Rewind to the start
+            solanaSound.play().catch(error => {
+                // Autoplay was prevented.
+                console.warn("Audio play failed:", error);
+            });
+            
+            // Show a scammy confirmation window
+            showFakeWindow(
+                'CONGRATULATIONS!',
+                '<i class="fas fa-rocket" style="color: #f09433;"></i>',
+                'You have successfully redeemed 0.000001 SOL! Your funds will be available in 3-5 business years. Thank you for your trust!'
+            );
+        });
+    }
 } 
