@@ -76,10 +76,12 @@ class ScammerChat {
             `;
         } else {
             messageDiv.innerHTML = `
-                <div class="message-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="message-avatar">
+                    <img src="./pump.PNG" alt="Pump.fun" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
                 <div class="message-content">
                     <div class="message-header">
-                        <span class="sender-name">AI_TechSupport_Raj</span>
+                        <span class="sender-name">Pump.fun</span>
                         <span class="timestamp">${timestamp}</span>
                     </div>
                     <div class="message-text">${text}</div>
@@ -96,10 +98,12 @@ class ScammerChat {
         typingDiv.className = 'message support';
         typingDiv.id = 'typingIndicator';
         typingDiv.innerHTML = `
-            <div class="message-avatar"><i class="fas fa-user-tie"></i></div>
+            <div class="message-avatar">
+                <img src="./public/pump.PNG" alt="Pump.fun" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
             <div class="message-content">
                 <div class="message-header">
-                    <span class="sender-name">AI_TechSupport_Raj</span>
+                    <span class="sender-name">Pump.fun</span>
                     <span class="timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</span>
                 </div>
                 <div class="message-text">
