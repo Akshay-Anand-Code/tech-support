@@ -1318,3 +1318,13 @@ body {
     50% { transform: scale(1.05); box-shadow: 0 0 25px #ffff00, 0 0 15px #f09433; }
     100% { transform: scale(1); box-shadow: 0 0 10px #ffff00; }
 }
+
+.pumpfun-logo-bg {
+    position: absolute;
+    right: 30px;
+    bottom: 80px;
+    width: 120px;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+}
