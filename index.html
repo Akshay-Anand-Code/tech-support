@@ -147,6 +147,11 @@
             
             <div class="window-content">
                 <button class="solana-button" id="solanaButton">REDEEM FOR SOLANA</button>
+                <button class="airdrop-button glitch" id="airdropButton" onclick="revealAirdrop()">
+                    <span class="glitch-text" data-text="REVEAL AIRDROP">REVEAL AIRDROP</span>
+                    <span class="glitch-text" data-text="REVEAL AIRDROP">REVEAL AIRDROP</span>
+                    <span class="glitch-text" data-text="REVEAL AIRDROP">REVEAL AIRDROP</span>
+                </button>
                 <div class="chat-container">
                     <div class="chat-messages" id="chatMessages">
                         <div class="message support">
@@ -247,6 +252,11 @@
             <div class="status-item">Connected to: definitely_not_scammer.exe</div>
             <div class="status-item">Security Level: COMPROMISED <i class="fas fa-dizzy"></i></div>
             <div class="status-item">Wallet Status: About to be Empty</div>
+            <div class="status-item contract-address">
+                <span class="address-label">Contract:</span>
+                <span class="address-value">0x1234...5678...9abc...def0</span>
+                <button class="copy-btn" onclick="copyAddress()"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
     </div>
 

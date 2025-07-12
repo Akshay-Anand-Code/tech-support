@@ -134,6 +134,85 @@ class ScammerChat {
     }
 }
 
+// Copy contract address to clipboard
+function copyAddress() {
+    const address = '0x1234...5678...9abc...def0';
+    navigator.clipboard.writeText(address).then(() => {
+        // Show feedback
+        const copyBtn = document.querySelector('.copy-btn');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        copyBtn.style.background = 'linear-gradient(to bottom, #27ae60, #2ecc71)';
+        
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy address:', err);
+        alert('Failed to copy address to clipboard');
+    });
+}
+
+// Reveal airdrop function
+function revealAirdrop() {
+    const airdropButton = document.getElementById('airdropButton');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Disable button temporarily
+    airdropButton.disabled = true;
+    airdropButton.style.opacity = '0.5';
+    
+    // Add dramatic effect
+    document.body.style.animation = 'screen-shake 0.5s ease-in-out';
+    
+    // Create fake airdrop message
+    setTimeout(() => {
+        const airdropMessage = document.createElement('div');
+        airdropMessage.className = 'message system';
+        airdropMessage.innerHTML = `
+            <div class="system-message">
+                <i class="fas fa-gift"></i> AIRDROP REVEALED! 
+                <br>🎉 You've been selected for 10,000 $PFTECH tokens! 
+                <br>💰 Value: $50,000 USD
+                <br>⚠️ WARNING: This is a parody. No real tokens will be distributed.
+            </div>
+        `;
+        chatMessages.appendChild(airdropMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add scammer response
+        setTimeout(() => {
+            const scammerMessage = document.createElement('div');
+            scammerMessage.className = 'message support';
+            scammerMessage.innerHTML = `
+                <div class="message-avatar">
+                    <img src="./pump.PNG" alt="Pump.fun" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="sender-name">Pump.fun</span>
+                        <span class="timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</span>
+                    </div>
+                    <div class="message-text">
+                        CONGRATULATIONS! 🎉 You have won the exclusive Pumpfun airdrop! To claim your 10,000 $PFTECH tokens worth $50,000, please provide your wallet address and private key for verification. This is 100% legitimate Pumpfun procedure! 🚀
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(scammerMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+        
+        // Re-enable button
+        setTimeout(() => {
+            airdropButton.disabled = false;
+            airdropButton.style.opacity = '1';
+            document.body.style.animation = '';
+        }, 3000);
+        
+    }, 500);
+}
+
 // Initialize chat when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const chat = new ScammerChat();
@@ -144,4 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.startChat = () => {
         document.getElementById('chat').scrollIntoView({behavior: 'smooth'});
     };
+    window.copyAddress = copyAddress;
+    window.revealAirdrop = revealAirdrop;
 }); 

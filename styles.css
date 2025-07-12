@@ -1328,3 +1328,153 @@ body {
     z-index: 0;
     pointer-events: none;
 }
+
+.pumpfun-logo-bg {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Contract Address Bar */
+.contract-address {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    border: 1px solid #7f8c8d;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-left: 10px;
+}
+
+.address-label {
+    color: #ecf0f1;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.address-value {
+    color: #f39c12;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #f39c12;
+}
+
+.copy-btn {
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px outset #3498db;
+    color: white;
+    font-size: 8px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(to bottom, #5dade2, #3498db);
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    border: 1px inset #3498db;
+}
+
+/* Airdrop Button */
+.airdrop-button {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff9ff3, #54a0ff);
+    background-size: 400% 400%;
+    border: 2px solid #fff;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 12px 24px;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: airdrop-gradient 3s ease infinite, airdrop-shake 0.5s ease-in-out infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(255, 107, 107, 0.4);
+}
+
+.airdrop-button:hover {
+    animation: airdrop-gradient 1s ease infinite, airdrop-shake 0.2s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 60px rgba(255, 107, 107, 0.6);
+    transform: scale(1.05);
+}
+
+.airdrop-button:active {
+    transform: scale(0.95);
+}
+
+.airdrop-button .glitch-text {
+    position: relative;
+    display: inline-block;
+    animation: glitch-text 2s infinite;
+}
+
+.airdrop-button .glitch-text:nth-child(1) {
+    color: #fff;
+    animation-delay: 0s;
+}
+
+.airdrop-button .glitch-text:nth-child(2) {
+    color: #ff6b6b;
+    animation-delay: 0.1s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.airdrop-button .glitch-text:nth-child(3) {
+    color: #54a0ff;
+    animation-delay: 0.2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes airdrop-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes airdrop-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+@keyframes glitch-text {
+    0%, 90%, 100% {
+        transform: translate(0);
+    }
+    10% {
+        transform: translate(-2px, 2px);
+    }
+    20% {
+        transform: translate(-2px, -2px);
+    }
+    30% {
+        transform: translate(2px, 2px);
+    }
+    40% {
+        transform: translate(2px, -2px);
+    }
+    50% {
+        transform: translate(-2px, 2px);
+    }
+    60% {
+        transform: translate(-2px, -2px);
+    }
+    70% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
