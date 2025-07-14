@@ -70,7 +70,7 @@ This application requires an OpenAI API key to function properly. Without a vali
    - "My computer is slow"
    - "I think I have a virus"
    - "Can you help me?"
-3. Watch as "Raj" responds with over-the-top scammer tactics
+3. Watch as "RAsslonaj" responds with over-the-top scammer tactics
 4. Interact with the fake Windows XP interface elements for added immersion
 
 ## 🛠️ Customization

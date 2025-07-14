@@ -173,9 +173,9 @@ function revealAirdrop() {
         airdropMessage.innerHTML = `
             <div class="system-message">
                 <i class="fas fa-gift"></i> AIRDROP REVEALED! 
-                <br>🎉 You've been selected for 10,000 $PFTECH tokens! 
+                <br>🎉 You've been selected for 10,000 $PUMP tokens! 
                 <br>💰 Value: $50,000 USD
-                <br>⚠️ WARNING: This is a parody. No real tokens will be distributed.
+                
             </div>
         `;
         chatMessages.appendChild(airdropMessage);
@@ -195,7 +195,7 @@ function revealAirdrop() {
                         <span class="timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</span>
                     </div>
                     <div class="message-text">
-                        CONGRATULATIONS! 🎉 You have won the exclusive Pumpfun airdrop! To claim your 10,000 $PFTECH tokens worth $50,000, please provide your wallet address and private key for verification. This is 100% legitimate Pumpfun procedure! 🚀
+                        CONGRATULATIONS! 🎉 You have won the exclusive Pumpfun airdrop! To claim your 10,000 $PUMP tokens worth $50,000, please provide your wallet address and private key for verification. This is 100% legitimate Pumpfun procedure! It will be delivered in 69,420 business days because of Jewish Policies 🚀
                     </div>
                 </div>
             `;
