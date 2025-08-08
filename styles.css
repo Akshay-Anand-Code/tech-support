@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
-    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+    background: #000;
     height: 100vh;
     overflow: hidden;
     cursor: default;
@@ -15,8 +15,21 @@ body {
 .desktop {
     height: 100vh;
     position: relative;
-    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(130, 130, 130, 0.15)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="#222222"/><rect width="100%" height="100%" fill="url(%23grid)" /></svg>');
     background-size: cover;
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.8);
+}
+
+.video-wallpaper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.5; /* Adjust opacity to ensure UI elements remain visible */
+    pointer-events: none; /* Prevents the video from capturing mouse events */
 }
 
 /* Taskbar */
@@ -25,19 +38,19 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40px;
-    background: linear-gradient(to bottom, #1e5799, #2989d8);
-    border-top: 1px solid #4e9ad8;
+    height: 45px;
+    background: linear-gradient(to bottom, #333, #222);
+    border-top: 1px solid #444;
     display: flex;
     align-items: center;
     z-index: 1000;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
 }
 
 .start-button {
-    background: linear-gradient(to bottom, #4e9ad8, #1e5799);
-    border: 1px outset #4e9ad8;
-    height: 32px;
+    background: linear-gradient(to bottom, #5a2c65, #3a1c45);
+    border: 1px solid #6d3a7a;
+    height: 35px;
     padding: 0 15px;
     margin: 4px;
     display: flex;
@@ -47,13 +60,15 @@ body {
     font-weight: bold;
     font-size: 12px;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 5px;
     transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .start-button:hover {
-    background: linear-gradient(to bottom, #5eaae8, #2e6799);
+    background: linear-gradient(to bottom, #6d3a7a, #4a2c55);
     transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .start-button:active {
@@ -72,23 +87,25 @@ body {
 }
 
 .taskbar-item {
-    background: linear-gradient(to bottom, #4e9ad8, #1e5799);
-    border: 1px outset #4e9ad8;
-    height: 32px;
-    padding: 0 10px;
+    background: linear-gradient(to bottom, #444, #333);
+    border: 1px solid #555;
+    height: 35px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     gap: 6px;
     color: white;
     font-size: 11px;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
     max-width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .taskbar-item.active {
-    border: 1px inset #4e9ad8;
-    background: linear-gradient(to bottom, #2e6799, #4e9ad8);
+    border: 1px solid #777;
+    background: linear-gradient(to bottom, #555, #444);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .system-tray {
@@ -141,7 +158,9 @@ body {
 }
 
 .desktop-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(52, 152, 219, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .desktop-icon .icon {
@@ -150,11 +169,26 @@ body {
 }
 
 .icon-label {
-    color: white;
-    font-size: 11px;
+    color: #ecf0f1;
+    font-size: 12px;
+    font-weight: 500;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.9), 0 0 4px rgba(0, 0, 0, 0.8);
     word-wrap: break-word;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-top: 2px;
+    backdrop-filter: blur(2px);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.desktop-icon:hover .icon-label {
+    color: #3498db;
+    background: rgba(0, 0, 0, 0.6);
+    text-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+    transform: scale(1.05);
 }
 
 /* Main Window */
@@ -166,22 +200,24 @@ body {
     width: 90%;
     max-width: 800px;
     height: 70%;
-    background: #ece9d8;
-    border: 2px outset #ece9d8;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    background: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(5px);
 }
 
 .window-header {
-    background: linear-gradient(to right, #0a246a, #a6caf0);
-    height: 30px;
+    background: linear-gradient(to right, #333, #222);
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px;
-    border-radius: 6px 6px 0 0;
+    padding: 0 10px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #444;
 }
 
 .window-title {
@@ -203,20 +239,25 @@ body {
 }
 
 .control-btn {
-    width: 21px;
-    height: 21px;
-    background: #c3c3c3;
-    border: 1px outset #c3c3c3;
+    width: 24px;
+    height: 24px;
+    background: #333;
+    border: 1px solid #555;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    margin-left: 5px;
+    color: #ddd;
+    transition: all 0.2s;
 }
 
 .control-btn:hover {
-    background: #d4d4d4;
+    background: #444;
+    transform: scale(1.1);
 }
 
 .control-btn:active {
@@ -224,23 +265,25 @@ body {
 }
 
 .control-btn.close {
-    background: #ff6b6b;
+    background: #e74c3c;
     color: white;
 }
 
 .control-btn.close:hover {
-    background: linear-gradient(to bottom, #f07f7f, #d12222);
+    background: #c0392b;
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
 }
 
 /* Window Content */
 .window-content {
     flex: 1;
-    padding: 10px;
-    background: #ece9d8;
+    padding: 15px;
+    background: #2a2a2a;
     position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Prevent content from overflowing */
+    border-radius: 0 0 8px 8px;
 }
 
 .chat-container {
@@ -248,20 +291,23 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1; /* Allow chat container to fill available space */
-    background: white;
+    background: #333;
     margin: 4px;
-    border: 2px inset #ece9d8;
+    border: 1px solid #444;
+    border-radius: 8px;
     overflow: hidden; /* Contain chat messages and input */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .chat-messages {
     flex: 1;
     padding: 15px;
     overflow-y: auto;
-    background: #f5f5f5;
+    background: #222;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23333' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .message {
@@ -298,15 +344,17 @@ body {
 }
 
 .message-content {
-    background: white;
-    border: 1px solid #ddd;
+    background: #333;
+    border: 1px solid #444;
     border-radius: 8px;
     padding: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: #ddd;
 }
 
 .message.user .message-content {
-    background: #e3f2fd;
+    background: #2c3e50;
+    border: 1px solid #34495e;
 }
 
 .message-header {
@@ -319,31 +367,33 @@ body {
 
 .sender-name {
     font-weight: bold;
-    color: #333;
+    color: #3498db;
+    text-shadow: 0 0 2px rgba(52, 152, 219, 0.5);
 }
 
 .message-text {
     font-size: 13px;
     line-height: 1.4;
-    color: #333;
+    color: #ddd;
 }
 
 .system-message {
-    background: #fff3cd;
-    border: 1px solid #ffeaa7;
+    background: #2c3e50;
+    border: 1px solid #34495e;
     padding: 10px;
     border-radius: 6px;
     text-align: center;
     font-size: 12px;
-    color: #856404;
+    color: #f39c12;
     margin: 10px 0;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
 }
 
 /* Chat Input */
 .chat-input-container {
     padding: 10px;
-    background: #f0f0f0;
-    border-top: 1px solid #ccc;
+    background: #222;
+    border-top: 1px solid #444;
     display: flex;
     gap: 8px;
 }
@@ -351,22 +401,29 @@ body {
 .chat-input {
     cursor: text;
     flex: 1;
-    padding: 8px;
-    border: 2px inset #ece9d8;
+    padding: 10px;
+    border: 1px solid #444;
     font-size: 12px;
-    background: white;
+    background: #333;
+    color: #ddd;
+    border-radius: 4px;
 }
 
 .send-button {
-    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
-    border: 1px outset #c3c3c3;
+    background: linear-gradient(to bottom, #5a2c65, #3a1c45);
+    border: 1px solid #6d3a7a;
     padding: 8px 15px;
     font-size: 12px;
     cursor: pointer;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .send-button:hover {
-    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+    background: linear-gradient(to bottom, #6d3a7a, #4a2c55);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .send-button:active {
@@ -379,23 +436,27 @@ body {
     top: 20px;
     right: 20px;
     width: 300px;
-    background: #ece9d8;
-    border: 2px outset #ece9d8;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    background: #222;
+    border: 1px solid #444;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
     z-index: 100;
     animation: popupBounce 0.5s ease-out;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
 }
 
 .popup-header {
-    background: linear-gradient(to right, #ff4444, #ffaaaa);
-    height: 24px;
+    background: linear-gradient(to right, #c0392b, #e74c3c);
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px;
+    padding: 0 12px;
     color: white;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #444;
 }
 
 .popup-close {
@@ -410,52 +471,65 @@ body {
 }
 
 .popup-content {
-    padding: 15px;
+    padding: 20px;
     text-align: center;
+    background: #222;
+    color: #ddd;
+    border-radius: 0 0 8px 8px;
 }
 
 .popup-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-size: 36px;
+    margin-bottom: 15px;
     animation: pulse 1s infinite;
-    color: #ff4444;
+    color: #e74c3c;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
 }
 
 .popup-text h3 {
-    color: #d32f2f;
-    margin-bottom: 8px;
-    font-size: 14px;
+    color: #e74c3c;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
 }
 
 .popup-text p {
     font-size: 12px;
-    margin-bottom: 5px;
-    color: #333;
+    margin-bottom: 8px;
+    color: #ddd;
 }
 
 .popup-buttons {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .popup-btn {
-    padding: 6px 12px;
-    border: 1px outset #c3c3c3;
-    background: linear-gradient(to bottom, #e6e6e6, #c3c3c3);
-    font-size: 11px;
+    padding: 8px 15px;
+    border: 1px solid #444;
+    background: linear-gradient(to bottom, #444, #333);
+    font-size: 12px;
     cursor: pointer;
+    color: #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
 }
 
 .popup-btn.danger {
-    background: linear-gradient(to bottom, #ff6b6b, #e74c3c);
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
     color: white;
     animation: blink 1.5s infinite;
+    border: 1px solid #c0392b;
+    box-shadow: 0 2px 10px rgba(231, 76, 60, 0.4);
 }
 
 .popup-btn:hover {
-    background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+    background: linear-gradient(to bottom, #555, #444);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .popup-btn:active {
@@ -468,19 +542,20 @@ body {
     bottom: 40px;
     left: 0;
     right: 0;
-    height: 20px;
-    background: #f0f0f0;
-    border-top: 1px solid #ccc;
+    height: 22px;
+    background: #222;
+    border-top: 1px solid #444;
     display: flex;
     align-items: center;
     padding: 0 10px;
     font-size: 11px;
-    color: #333;
+    color: #aaa;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .status-item {
-    padding: 0 10px;
-    border-right: 1px solid #ccc;
+    padding: 0 12px;
+    border-right: 1px solid #444;
 }
 
 .status-item:last-child {
@@ -757,12 +832,16 @@ body {
 
 /* Desktop Icon Selection */
 .desktop-icon.selected {
-    background: rgba(11, 97, 255, 0.2);
-    border: 1px dotted #fff;
+    background: rgba(52, 152, 219, 0.25);
+    border: 1px solid rgba(52, 152, 219, 0.7);
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
 }
 
 .desktop-icon:active {
-    transform: translateY(1px);
+    transform: scale(0.95);
+    background: rgba(52, 152, 219, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Windows and Popups */
@@ -902,6 +981,12 @@ body {
     50%, 100% { opacity: 1; }
 }
 
+@keyframes iconPulse {
+    0% { box-shadow: 0 4px 12px 0 rgba(0,0,0,0.5), 0 0 0 rgba(52, 152, 219, 0.1); }
+    50% { box-shadow: 0 4px 12px 0 rgba(0,0,0,0.5), 0 0 15px rgba(52, 152, 219, 0.6); }
+    100% { box-shadow: 0 4px 12px 0 rgba(0,0,0,0.5), 0 0 0 rgba(52, 152, 219, 0.1); }
+}
+
 /* XP-style icons */
 .xp-icon {
     width: 48px;
@@ -909,56 +994,81 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #7fd4ff 0%, #1084d0 60%, #0a2740 100%);
-    border-radius: 10px;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a2530 60%, #0f1c2a 100%);
+    border-radius: 12px;
     box-shadow:
-        0 2px 8px 0 rgba(0,0,0,0.35), /* outer shadow */
-        0 1px 0 0 #fff inset,           /* top inner highlight */
-        0 -2px 8px 0 #0a2740 inset;    /* bottom inner shadow */
-    margin-bottom: 6px;
-    border: 1.5px solid #0563a4;
+        0 4px 12px 0 rgba(0,0,0,0.5), /* outer shadow */
+        0 1px 0 0 rgba(255,255,255,0.1) inset, /* top inner highlight */
+        0 -2px 8px 0 rgba(0,0,0,0.6) inset; /* bottom inner shadow */
+    margin-bottom: 8px;
+    border: 1.5px solid #3498db;
     color: white;
     font-size: 28px;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+    animation: iconPulse 3s infinite;
 }
 
 .xp-icon::after {
     content: '';
     position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    height: 12px;
-    border-radius: 8px 8px 6px 6px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.08) 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0) 60%);
     pointer-events: none;
+    opacity: 0.7;
+    z-index: 1;
 }
 
 .xp-icon i, .xp-icon svg {
-    filter: drop-shadow(1.5px 2px 2px rgba(0,0,0,0.35));
+    filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.8));
+    position: relative;
+    z-index: 2;
 }
 
 .xp-icon svg {
     width: 28px;
     height: 28px;
-    stroke: #fff;
-    stroke-width: 1.2;
+    stroke: #3498db;
+    stroke-width: 1.5;
     paint-order: stroke fill;
     background: none;
     border-radius: 4px;
+    opacity: 0.9;
 }
 
 .desktop-icon .fa-desktop {
-    color: #f8f8ff;
+    color: #3498db;
+    animation: iconGlow 3s infinite alternate;
+}
+
+@keyframes iconGlow {
+    0% { text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+    100% { text-shadow: 0 0 15px rgba(52, 152, 219, 0.9); }
 }
 
 .desktop-icon .fa-folder {
-    color: #ffffcc;
+    color: #f1c40f;
+    animation: folderGlow 4s infinite alternate;
+}
+
+@keyframes folderGlow {
+    0% { text-shadow: 0 0 5px rgba(241, 196, 15, 0.5); }
+    100% { text-shadow: 0 0 15px rgba(241, 196, 15, 0.9); }
 }
 
 .desktop-icon .fa-trash-alt {
-    color: #f0f0f0;
+    color: #e74c3c;
+    animation: trashGlow 5s infinite alternate;
+}
+
+@keyframes trashGlow {
+    0% { text-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
+    100% { text-shadow: 0 0 15px rgba(231, 76, 60, 0.9); }
 }
 
 .message-avatar {
@@ -1219,40 +1329,52 @@ body {
     z-index: 0;
     overflow: hidden;
     pointer-events: none; /* Make ads unclickable */
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
 }
 
 .wallpaper-ad {
     position: absolute;
-    background-color: #c0c0c0; /* Classic grey */
-    border: 2px outset #eeeeee;
-    padding: 10px;
+    background-color: rgba(20, 20, 20, 0.85);
+    border: 2px solid #e74c3c;
+    padding: 15px;
     font-family: "Impact", "Arial Black", sans-serif;
     text-align: center;
     width: 250px;
     animation: ad-blink 1s infinite;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+    backdrop-filter: blur(3px);
 }
 
 .wallpaper-ad h3 {
-    color: #0000ff; /* Bright blue */
-    margin-bottom: 5px;
-    font-size: 1.2em;
+    color: #e74c3c; /* Bright red */
+    margin-bottom: 8px;
+    font-size: 1.3em;
     text-transform: uppercase;
     animation: text-color-blink 0.8s infinite;
+    text-shadow: 0 0 5px rgba(231, 76, 60, 0.7);
 }
 
 .wallpaper-ad p {
-    margin-bottom: 10px;
-    color: #000000;
+    margin-bottom: 12px;
+    color: #ddd;
     font-family: "Arial", sans-serif;
     font-size: 0.9em;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .wallpaper-ad a {
-    color: #0000ff;
+    color: #3498db;
     font-weight: bold;
     text-decoration: underline;
     font-family: "Times New Roman", serif;
     animation: a-color-blink 1.2s infinite;
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
+    padding: 5px 10px;
+    border: 1px solid #3498db;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .ad-1 {
@@ -1282,15 +1404,21 @@ body {
 }
 
 @keyframes ad-blink {
-    50% { border-color: #ff00ff; background-color: #b0b0b0; }
+    0% { border-color: #e74c3c; box-shadow: 0 0 15px rgba(231, 76, 60, 0.4); }
+    50% { border-color: #c0392b; box-shadow: 0 0 25px rgba(231, 76, 60, 0.7); background-color: rgba(30, 30, 30, 0.9); }
+    100% { border-color: #e74c3c; box-shadow: 0 0 15px rgba(231, 76, 60, 0.4); }
 }
 
 @keyframes text-color-blink {
-    50% { color: #ff0000; }
+    0% { color: #e74c3c; text-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
+    50% { color: #f39c12; text-shadow: 0 0 10px rgba(243, 156, 18, 0.7); }
+    100% { color: #e74c3c; text-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
 }
 
 @keyframes a-color-blink {
-    50% { color: #ff00ff; }
+    0% { color: #3498db; text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+    50% { color: #2ecc71; text-shadow: 0 0 10px rgba(46, 204, 113, 0.7); border-color: #2ecc71; }
+    100% { color: #3498db; text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
 }
 
 /* --- Solana Button --- */
@@ -1298,15 +1426,17 @@ body {
     display: block;
     width: 80%;
     margin: 10px auto;
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #3498db 0%, #2980b9 50%, #1f618d 100%);
     color: white;
-    border: 2px solid #ffff00;
+    border: 2px solid #2c3e50;
     font-family: "Impact", "Arial Black", sans-serif;
     font-size: 16px;
-    padding: 8px 15px;
+    padding: 12px 20px;
     cursor: pointer;
-    text-shadow: 2px 2px 4px #000000;
-    animation: solana-pulse 1s infinite;
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+    animation: solana-pulse 1.5s infinite;
+    border-radius: 8px;
+    letter-spacing: 1px;
 }
 
 .solana-button:active {
@@ -1314,9 +1444,9 @@ body {
 }
 
 @keyframes solana-pulse {
-    0% { transform: scale(1); box-shadow: 0 0 10px #ffff00; }
-    50% { transform: scale(1.05); box-shadow: 0 0 25px #ffff00, 0 0 15px #f09433; }
-    100% { transform: scale(1); box-shadow: 0 0 10px #ffff00; }
+    0% { transform: scale(1); box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(52, 152, 219, 0.8), 0 0 15px rgba(41, 128, 185, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
 }
 
 .pumpfun-logo-bg {
@@ -1381,9 +1511,9 @@ body {
 
 /* Airdrop Button */
 .airdrop-button {
-    background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff9ff3, #54a0ff);
+    background: linear-gradient(45deg, #9b59b6, #8e44ad, #9b59b6, #8e44ad);
     background-size: 400% 400%;
-    border: 2px solid #fff;
+    border: 2px solid #8e44ad;
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -1394,8 +1524,9 @@ body {
     position: relative;
     overflow: hidden;
     animation: airdrop-gradient 3s ease infinite, airdrop-shake 0.5s ease-in-out infinite;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(255, 107, 107, 0.4);
+    text-shadow: 0 0 10px rgba(155, 89, 182, 0.8);
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.6), 0 0 40px rgba(155, 89, 182, 0.4);
+    letter-spacing: 1px;
 }
 
 .airdrop-button:hover {
@@ -1438,9 +1569,9 @@ body {
 }
 
 @keyframes airdrop-gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% { background-position: 0% 50%; box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); }
+    50% { background-position: 100% 50%; box-shadow: 0 0 30px rgba(155, 89, 182, 0.8); }
+    100% { background-position: 0% 50%; box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); }
 }
 
 @keyframes airdrop-shake {
